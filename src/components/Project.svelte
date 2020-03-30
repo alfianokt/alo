@@ -4,6 +4,7 @@
   import { converter } from '../util/showdown'
   import { getFromSlug } from '../util/api'
 
+	let title = "..."
   let response = {}
 
   onMount(() => {
@@ -11,16 +12,24 @@
       .then(async res => {
 				response = await res.json()
       })
-  })
+	})
+
+	$: title = () => {
+		return Object.keys(response).length != 0 ?
+			response.code == 200 ?
+				response.data[0].title :
+				"tidak ditemukan!" :
+			'"..."'
+	}
 </script>
 
 <svelte:head>
-  <title>Project { Object.keys(response) == 0 ? '"..."' : response.data[0].title } | Alo</title>
+  <title>Project {title()} | Alo</title>
 </svelte:head>
 
-<div id="projects">
+<div id="project">
 		<p class="title">
-			<a href="#projects">#</a>
+			<a href="#project">#</a>
 			Project
 		</p>
 		{#if Object.keys(response) == 0}
