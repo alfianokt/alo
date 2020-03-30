@@ -1,0 +1,27 @@
+/* Make clicks pass-through */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  position: fixed;
+  z-index: 1031;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+#nprogress .bar .nes-progress {
+  border-image-outset: 0;
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
